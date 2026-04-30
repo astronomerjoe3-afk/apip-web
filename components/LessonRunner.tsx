@@ -10600,6 +10600,478 @@ function getA10ScaffoldRoleplayCard({
   return null;
 }
 
+function getA11ScaffoldRoleplayCard({
+  lessonId,
+  isMediaStep,
+  activeMediaIndex,
+  isSectionStep,
+  activeSectionWorkedExample,
+  activeSectionHeading,
+}: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A11_L1") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a11-l1-gravity-landscape-board",
+        badge: "Gravity landscape",
+        title: "Read pull strength and depth as linked but different gravity maps",
+        scenario:
+          "The gravity-landscape board shows inward field arrows and a potential-depth map around the same planet. One trainee keeps saying field strength and potential are the same thing because both change with radius, another keeps treating gravitational potential as a positive energy pile near the planet, and a third assumes both quantities must follow the same radius rule.",
+        prompt: "Pin the note that keeps the landscape reading accurate.",
+        options: [
+          {
+            value: "field-vs-potential-landscape-note",
+            label: "Treat the board as one landscape with two different readings. Gravitational field strength tells the inward force per kilogram, while gravitational potential tells the energy per kilogram relative to zero at infinity. Closer to the planet the field is stronger and the potential is more negative, but the two quantities are not identical and they do not scale with radius in the same way.",
+            feedback:
+              "Exactly. That keeps force-per-mass, energy-per-mass, sign, and radius-dependence in the right A11_L1 order.",
+            isCorrect: true,
+          },
+          {
+            value: "same-map-same-quantity-note",
+            label: "Treat field strength and potential as two names for the same gravity reading, because once both are shown on one map the safest assumption is that they are just equivalent ways to describe how strong gravity is.",
+            feedback:
+              "That would collapse the main field-versus-potential distinction.",
+          },
+          {
+            value: "potential-positive-near-mass-note",
+            label: "Treat gravitational potential near the planet as a larger positive energy value, because being closer to a massive body should naturally mean the location contains more gravitational energy per kilogram.",
+            feedback:
+              "That would lose the infinity reference and the negative-potential meaning.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads gravity as linked slope and depth maps instead of one blurred quantity.",
+        retryLabel: "That note would leave a main A11_L1 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a11-l1-fix-ideas",
+          badge: "Map repair",
+          title: "Repair the field-equals-potential and minus-sign shortcuts",
+          scenario:
+            "One analyst keeps explaining gravitational field strength and potential as if they were the same reading with different units, while another keeps deleting the minus sign because they think energy per kilogram near a planet should not be negative.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-separate-reading-and-sign",
+              label: "Repair both habits together: decide first whether the question asks for force per unit mass or energy per unit mass. Then keep the infinity reference visible so field strength is an inward pull measure, while potential is an energy-per-mass depth that is negative near the planet.",
+              feedback:
+                "Exactly. That restores the right A11_L1 workflow immediately.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-stronger-gravity-only-a11-l1",
+              label: "Repair the confusion by focusing mainly on the fact that gravity gets stronger closer to the planet, because once that is clear the field, potential, and sign details usually sort themselves out afterward.",
+              feedback:
+                "That would leave the two readings too blended together.",
+            },
+            {
+              value: "repair-by-removing-minus-sign-a11-l1",
+              label: "Repair the confusion by dropping the minus sign and treating potential as a positive size only, because sign conventions usually add more complication than value in a first gravity comparison.",
+              feedback:
+                "That would erase a core lesson meaning rather than repair it.",
+            },
+          ],
+          successLabel: "Repair sent. The room now separates the two gravity readings before touching equations.",
+          retryLabel: "That would leave a main A11_L1 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a11-l1-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line gravity-landscape rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so learners stop flattening this lesson into a single vague statement about gravity being strong near a planet.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a11-l1-anchor",
+              label: "Gravitational field strength and gravitational potential describe the same landscape in different ways: one tracks force per mass and the other tracks energy per mass.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "gravity-stronger-is-whole-idea-a11-l1",
+              label: "The main idea is mostly that gravity gets stronger near the planet, because once that is known the difference between field and potential usually becomes secondary detail.",
+              feedback:
+                "That would weaken the actual field-versus-potential split too much.",
+            },
+            {
+              value: "potential-is-just-energy-store-a11-l1",
+              label: "The main idea is mostly that gravitational potential is another name for stored gravitational energy, because once that is known the field map usually becomes a secondary detail.",
+              feedback:
+                "That would blur energy per mass with the separate field reading.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right gravity-landscape idea.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a11-l1-technical-words",
+          badge: "Term desk",
+          title: "Clean up the gravity-field vocabulary board",
+          scenario:
+            "The crew keeps mixing field strength, potential, test mass, infinity reference, and negative sign language until every explanation sounds like one fuzzy story about gravity getting bigger near a planet.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a11-l1",
+              label: "Use gravitational field strength for force per unit mass at a point, gravitational potential for energy per unit mass relative to zero at infinity, test mass for the small probe that samples the landscape without changing the source, and negative potential for the fact that a location near the planet sits below the infinity reference level.",
+              feedback:
+                "Exactly. That keeps the A11_L1 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-force-does-most-a11-l1",
+              label: "Use force language as the main word for almost the whole topic, because once students know gravity pulls inward the separate meanings of field strength, potential, and infinity reference usually become minor detail.",
+              feedback:
+                "That would collapse the lesson vocabulary too far.",
+            },
+            {
+              value: "term-board-energy-does-most-a11-l1",
+              label: "Use energy language as the main word for almost the whole topic, because once students know potential has units of joules per kilogram the field language usually becomes secondary detail.",
+              feedback:
+                "That would blur the force-per-mass side too much.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A11_L1 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a11-l1-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they solve the gravity case",
+          scenario:
+            "The trainee analyst is about to substitute into formulas, but they have not yet separated whether the target is a force-per-mass reading or an energy-per-mass reading, and they have not checked what the radius does to each quantity.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-with-quantity-then-radius-rule",
+              label: "Start by naming the quantity: is the question asking for force per kilogram or energy per kilogram? Then choose the correct radius rule, keeping field strength with the inverse-square pattern and potential with the inverse-first-power pattern. Finally check the sign on potential using zero at infinity.",
+              feedback:
+                "Exactly. That gives the analyst the right A11_L1 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-gravity-gets-stronger-a11-l1",
+              label: "Start from the general idea that gravity gets stronger closer in, because once that trend is recognized the exact distinction between field, potential, and sign usually becomes easy enough to guess.",
+              feedback:
+                "That would send the analyst back into trend-only guessing.",
+            },
+            {
+              value: "start-from-potential-sign-alone-a11-l1",
+              label: "Start from remembering that potential is negative, because once the sign is fixed the field-strength and radius-pattern details usually become small follow-ups.",
+              feedback:
+                "That would put one sign fact ahead of the actual quantity choice.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean quantity-choice-to-radius-rule method.",
+          retryLabel: "That would send the analyst back into an A11_L1 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a11-l1-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the same-quantity and same-radius-rule shortcuts",
+          scenario:
+            "One crew member keeps using the same formula pattern for both gravitational field strength and potential, while another keeps treating the minus sign on potential as optional decoration.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a11-l1-trap-warning",
+              label: "Do not treat field strength and potential as the same reading, and do not force them into the same radius rule. Field strength follows the inverse-square pattern, potential follows the inverse-first-power pattern, and the negative sign on potential matters because infinity is the zero reference.",
+              feedback:
+                "Exactly. That warning blocks the main A11_L1 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "radius-warning-only-a11-l1",
+              label: "Warn mainly that radius matters, because once students stop ignoring distance they usually recover the field-versus-potential distinction on their own.",
+              feedback:
+                "That would leave the quantity split too weak.",
+            },
+            {
+              value: "sign-warning-only-a11-l1",
+              label: "Warn mainly that potential is negative, because once students keep the minus sign the rest of the field-and-potential comparison usually becomes obvious enough automatically.",
+              feedback:
+                "That would leave the different radius patterns too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps quantity type, radius rule, and sign in the right order.",
+          retryLabel: "That warning would leave a main A11_L1 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a11-l1-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps steepness separate from depth",
+          scenario:
+            "The team wants a comparison that helps beginners feel why gravitational field strength and potential belong to one landscape without becoming the same number. The picture needs both local steepness and overall depth to stay visible at once.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "cliff-depth-analogy-a11-l1",
+              label: "Think of a valley map where one reading tells you how steep the local slope is and another tells you how deep below sea level the location sits. Steepness and depth are linked, but they are not the same measurement. Gravity field strength is the steepness-style reading, while gravitational potential is the depth-style reading relative to the zero level far away.",
+              feedback:
+                "Exactly. That keeps linked landscape meaning without flattening the two readings together.",
+              isCorrect: true,
+            },
+            {
+              value: "single-height-number-analogy-a11-l1",
+              label: "Think mainly of one height number on a map, because the most intuitive analogy is usually one where local steepness and total depth can be treated as the same thing for a first pass.",
+              feedback:
+                "That would erase the main lesson split.",
+            },
+            {
+              value: "rope-pull-only-analogy-a11-l1",
+              label: "Think mainly of how hard a rope pulls an object, because the most intuitive analogy is usually one where the local pull strength is enough and the energy-per-mass landscape can stay in the background.",
+              feedback:
+                "That would flatten the lesson into field only.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on steepness versus depth across one gravity landscape.",
+          retryLabel: "That analogy would pull the lesson away from the right A11_L1 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
+  return null;
+}
+
+function getF5L6ScaffoldRoleplayCard({
+  lessonId,
+  isMediaStep,
+  activeMediaIndex,
+  isSectionStep,
+  activeSectionWorkedExample,
+  activeSectionHeading,
+}: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "F5_L6") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "f5-l6-sky-board",
+        badge: "Sky board",
+        title: "Read the day-year-scale comparison",
+        scenario:
+          "The Observatory room is comparing one daily sky sweep, one full year, and a classroom Solar System sketch. One trainee keeps saying the Sun crosses the sky each day because Earth finishes a new orbit every day, and another keeps treating the drawing's distances as literal.",
+        prompt: "Choose the note to pin on the display.",
+        options: [
+          {
+            value: "rotation-day-orbit-year-compressed-scale",
+            label: "Earth's rotation explains the Sun's daily apparent path, Earth's orbit explains the year, and most classroom Solar System sketches keep the relationship pattern while strongly compressing the real distances.",
+            feedback:
+              "Exactly. That keeps day, year, apparent motion, and model scale in the right places.",
+            isCorrect: true,
+          },
+          {
+            value: "daily-sun-path-from-daily-orbit",
+            label: "The Sun appears to cross the sky each day because Earth completes a fresh orbit around the Sun every 24 hours, and the sketch can be trusted for rough orbit spacing because the order is correct.",
+            feedback:
+              "That mixes the timescales. Daily sky motion comes from rotation, and the model order being right does not make the distances literal.",
+          },
+          {
+            value: "apparent-motion-is-whole-story",
+            label: "The daily sky sweep is the main real motion story, so it is safe to use it as evidence for both the year length and the exact orbital scale shown in the sketch.",
+            feedback:
+              "That collapses three ideas into one. The lesson keeps apparent motion, real motions, and compressed scale separate.",
+          },
+        ],
+        successLabel: "Pinned. The room can now read day, year, and model scale without collapsing them together.",
+        retryLabel: "That note would blur the rotation story or trust the sketch too literally.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "f5-l6-fix-ideas",
+          badge: "Signal repair",
+          title: "Repair the first sky-motion note",
+          scenario:
+            "A trainee has written that the Sun's daily apparent path proves Earth goes around the Sun once every day. You need the correction that fixes the timescale before the lesson moves on.",
+          prompt: "Choose the correction to send.",
+          options: [
+            {
+              value: "rotation-for-day-orbit-for-year",
+              label: "The Sun's daily apparent path comes from Earth's rotation. Earth's orbit around the Sun takes about one year, so day and year must be matched to different motions.",
+              feedback:
+                "Exactly. That restores the missing timescale separation immediately.",
+              isCorrect: true,
+            },
+            {
+              value: "orbit-does-both",
+              label: "Earth's orbit can explain both the daily sky sweep and the yearly cycle, so the safest correction is just to say the orbit is the main motion behind everything we see.",
+              feedback:
+                "That keeps the confusion alive. The lesson needs rotation for the day and orbit for the year.",
+            },
+            {
+              value: "apparent-motion-replaces-real-motion",
+              label: "The correction should focus on the fact that apparent motion is what matters most, because once we know what we see, the real motions underneath no longer need separate names.",
+              feedback:
+                "Apparent motion matters, but it does not replace the real-motion explanation. The learner still needs rotation and orbit separated.",
+            },
+          ],
+          successLabel: "Repair sent. The room now keeps daily appearance tied to rotation and the year tied to orbit.",
+          retryLabel: "That would leave the day-versus-year confusion active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "f5-l6-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line sky-scale rule",
+          scenario:
+            "Control wants one sentence on the wall so every learner starts the lesson with the right astronomy anchor.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "day-rotation-year-orbit-scale-compressed",
+              label: "A day comes from Earth's rotation, a year comes from Earth's orbit around the Sun, and classroom Solar System sketches usually preserve the relationship pattern while heavily compressing the real distances.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "daily-path-is-full-motion-story",
+              label: "The Sun's daily sky path is the main motion story, so once that is understood the year length and orbit scale can be read directly from the same sweep.",
+              feedback:
+                "That collapses the lesson into one timescale. The anchor has to separate day, year, and compressed scale.",
+            },
+            {
+              value: "accurate-drawing-because-order-right",
+              label: "A Solar System sketch is usually trustworthy for distances as long as the planets are in the right order, so the safest summary is to read the scale directly but treat the timing more loosely.",
+              feedback:
+                "That flips the warning backward. The sketch often keeps the pattern while shrinking the distances strongly.",
+            },
+          ],
+          successLabel: "Posted. The room now starts with the right day-year-scale structure.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "f5-l6-how-to-reason",
+          badge: "Coach move",
+          title: "Coach the observatory analyst",
+          scenario:
+            "A trainee keeps mixing what we see in the sky with the real motions underneath and then trusting the sketch literally. You need the coaching note that gives them a reliable order.",
+          prompt: "Choose the coaching note to send.",
+          options: [
+            {
+              value: "appearance-then-real-motion-then-scale-warning",
+              label: "First name the appearance being described. Then match day to rotation and year to orbit. Only after that ask whether the drawing is showing exact size and spacing or just a compressed relationship pattern.",
+              feedback:
+                "Exactly. That keeps observation, real motion, and model trust in the right order.",
+              isCorrect: true,
+            },
+            {
+              value: "trust-model-first",
+              label: "First trust the model's spacing, then use the picture to decide which motion must be happening each day and each year afterward.",
+              feedback:
+                "That starts from the least safe part. The model-scale warning belongs after the motion matching, not before it.",
+            },
+            {
+              value: "start-with-year-because-bigger",
+              label: "First decide the yearly orbit because it is the bigger motion, then let that same orbit story explain the daily sky sweep unless the diagram says otherwise.",
+              feedback:
+                "That rebuilds the exact shortcut the lesson is trying to remove. The daily sky sweep still comes from rotation.",
+            },
+          ],
+          successLabel: "Coaching note sent. The analyst now has a stable order for reading sky motion and model scale.",
+          retryLabel: "That method would scramble appearance, real motion, and model trust.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "f5-l6-common-trap",
+          badge: "Trap shield",
+          title: "Block the scale-is-literal shortcut",
+          scenario:
+            "The next learner note says: 'The sketch shows the planets in the right order, so the distances must be roughly right too.' You need the warning that blocks that shortcut before it spreads.",
+          prompt: "Choose the warning to pin beside the trap.",
+          options: [
+            {
+              value: "pattern-can-be-right-while-scale-is-compressed",
+              label: "A model can get the order, direction, and relationship pattern right while still shrinking the real distances and times a lot. Treat the structure as trustworthy before you treat the scale as literal.",
+              feedback:
+                "Exactly. That is the scale warning this lesson needs learners to remember.",
+              isCorrect: true,
+            },
+            {
+              value: "order-proves-rough-scale",
+              label: "If the order of bodies is right, that is usually enough evidence that the distances are at least roughly to scale, even if the exact numbers are not perfect.",
+              feedback:
+                "That keeps the trap alive. The whole warning is that correct ordering does not guarantee literal scale.",
+            },
+            {
+              value: "ignore-model-warning",
+              label: "The safest move is to ignore model-scale warnings completely, because they only matter in advanced astronomy and do not affect a simple day-and-year lesson.",
+              feedback:
+                "The warning matters here because the lesson explicitly teaches pattern versus exact scale.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps relationship pattern and literal scale separate.",
+          retryLabel: "That warning would let the scale shortcut survive.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "f5-l6-analogy",
+          badge: "Story relay",
+          title: "Choose the globe-and-sketch bridge",
+          scenario:
+            "The team wants one analogy line that helps learners picture why a classroom model can show the right pattern while shrinking the real distances, without confusing the daily sky appearance with the yearly orbit.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "globe-spin-calendar-sketch",
+              label: "Use the analogy by treating the daily sky sweep like a globe turning once each day, the year like a separate calendar loop around the Sun, and the classroom sketch like a map that keeps the layout pattern while shrinking the real spacing heavily.",
+              feedback:
+                "Exactly. That bridge supports the whole lesson without collapsing day, year, and scale together.",
+              isCorrect: true,
+            },
+            {
+              value: "single-motion-analogy",
+              label: "Use one single-motion analogy for everything: the same looping path can stand for the daily sky sweep, the yearly orbit, and the scaled drawing all at once if the learner keeps the picture in mind.",
+              feedback:
+                "That analogy would blur the three ideas together instead of separating them.",
+            },
+            {
+              value: "literal-mini-solar-system",
+              label: "Use the analogy by describing the sketch as a tiny but still roughly literal Solar System, so learners can trust the distances while remembering the times are shortened for convenience.",
+              feedback:
+                "That would undo the scale warning. The lesson needs the model treated as strongly compressed, not roughly literal.",
+            },
+          ],
+          successLabel: "Analogy chosen. It supports day, year, and compressed scale without mixing them together.",
+          retryLabel: "That analogy would muddy the lesson instead of helping it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
+  return null;
+}
+
 function getOrderedScaffoldRoleplayOptions(card: ScaffoldRoleplayCard): ScaffoldRoleplayOption[] {
   if (card.options.length <= 1) return card.options;
   const correctIndex = card.options.findIndex((option) => option.isCorrect);
@@ -11871,6 +12343,14 @@ export default function LessonRunner({
       activeSectionWorkedExample: Boolean(activeSection?.worked_example),
       activeSectionHeading,
     });
+    const a11ScaffoldRoleplayCard = getA11ScaffoldRoleplayCard({
+      lessonId,
+      isMediaStep,
+      activeMediaIndex,
+      isSectionStep,
+      activeSectionWorkedExample: Boolean(activeSection?.worked_example),
+      activeSectionHeading,
+    });
     const scaffoldClarityPanel = renderClarityLensPanel(
       "Concept-first frame",
       "Understand this idea before you move on",
@@ -11884,6 +12364,7 @@ export default function LessonRunner({
         a8ScaffoldRoleplayCard ??
         a9ScaffoldRoleplayCard ??
         a10ScaffoldRoleplayCard ??
+        a11ScaffoldRoleplayCard ??
         (
         lessonId === "M1_L1" ||
         lessonId === "M1_L2" ||
@@ -12017,213 +12498,15 @@ export default function LessonRunner({
         lessonId === "F5_L5" ||
         lessonId === "F5_L6"
           ? (() => {
-              if (lessonId === "F5_L6") {
-                if (isMediaStep && activeMediaIndex === 0) {
-                  return {
-                    id: "f5-l6-sky-board",
-                    badge: "Sky board",
-                    title: "Read the day-year-scale comparison",
-                    scenario:
-                      "The Observatory room is comparing one daily sky sweep, one full year, and a classroom Solar System sketch. One trainee keeps saying the Sun crosses the sky each day because Earth finishes a new orbit every day, and another keeps treating the drawing's distances as literal.",
-                    prompt: "Choose the note to pin on the display.",
-                    options: [
-                      {
-                        value: "rotation-day-orbit-year-compressed-scale",
-                        label: "Earth's rotation explains the Sun's daily apparent path, Earth's orbit explains the year, and most classroom Solar System sketches keep the relationship pattern while strongly compressing the real distances.",
-                        feedback:
-                          "Exactly. That keeps day, year, apparent motion, and model scale in the right places.",
-                        isCorrect: true,
-                      },
-                      {
-                        value: "daily-sun-path-from-daily-orbit",
-                        label: "The Sun appears to cross the sky each day because Earth completes a fresh orbit around the Sun every 24 hours, and the sketch can be trusted for rough orbit spacing because the order is correct.",
-                        feedback:
-                          "That mixes the timescales. Daily sky motion comes from rotation, and the model order being right does not make the distances literal.",
-                      },
-                      {
-                        value: "apparent-motion-is-whole-story",
-                        label: "The daily sky sweep is the main real motion story, so it is safe to use it as evidence for both the year length and the exact orbital scale shown in the sketch.",
-                        feedback:
-                          "That collapses three ideas into one. The lesson keeps apparent motion, real motions, and compressed scale separate.",
-                      },
-                    ],
-                    successLabel: "Pinned. The room can now read day, year, and model scale without collapsing them together.",
-                    retryLabel: "That note would blur the rotation story or trust the sketch too literally.",
-                  } satisfies ScaffoldRoleplayCard;
-                }
-
-                if (isSectionStep && !activeSection?.worked_example) {
-                  if (activeSectionHeading === "fix these ideas") {
-                    return {
-                      id: "f5-l6-fix-ideas",
-                      badge: "Signal repair",
-                      title: "Repair the first sky-motion note",
-                      scenario:
-                        "A trainee has written that the Sun's daily apparent path proves Earth goes around the Sun once every day. You need the correction that fixes the timescale before the lesson moves on.",
-                      prompt: "Choose the correction to send.",
-                      options: [
-                        {
-                          value: "rotation-for-day-orbit-for-year",
-                          label: "The Sun's daily apparent path comes from Earth's rotation. Earth's orbit around the Sun takes about one year, so day and year must be matched to different motions.",
-                          feedback:
-                            "Exactly. That restores the missing timescale separation immediately.",
-                          isCorrect: true,
-                        },
-                        {
-                          value: "orbit-does-both",
-                          label: "Earth's orbit can explain both the daily sky sweep and the yearly cycle, so the safest correction is just to say the orbit is the main motion behind everything we see.",
-                          feedback:
-                            "That keeps the confusion alive. The lesson needs rotation for the day and orbit for the year.",
-                        },
-                        {
-                          value: "apparent-motion-replaces-real-motion",
-                          label: "The correction should focus on the fact that apparent motion is what matters most, because once we know what we see, the real motions underneath no longer need separate names.",
-                          feedback:
-                            "Apparent motion matters, but it does not replace the real-motion explanation. The learner still needs rotation and orbit separated.",
-                        },
-                      ],
-                      successLabel: "Repair sent. The room now keeps daily appearance tied to rotation and the year tied to orbit.",
-                      retryLabel: "That would leave the day-versus-year confusion active.",
-                    } satisfies ScaffoldRoleplayCard;
-                  }
-
-                  if (activeSectionHeading === "core idea") {
-                    return {
-                      id: "f5-l6-core-idea",
-                      badge: "Ops summary",
-                      title: "Post the one-line sky-scale rule",
-                      scenario:
-                        "Control wants one sentence on the wall so every learner starts the lesson with the right astronomy anchor.",
-                      prompt: "Choose the line to post.",
-                      options: [
-                        {
-                          value: "day-rotation-year-orbit-scale-compressed",
-                          label: "A day comes from Earth's rotation, a year comes from Earth's orbit around the Sun, and classroom Solar System sketches usually preserve the relationship pattern while heavily compressing the real distances.",
-                          feedback:
-                            "Exactly. That is the clean anchor sentence this lesson needs.",
-                          isCorrect: true,
-                        },
-                        {
-                          value: "daily-path-is-full-motion-story",
-                          label: "The Sun's daily sky path is the main motion story, so once that is understood the year length and orbit scale can be read directly from the same sweep.",
-                          feedback:
-                            "That collapses the lesson into one timescale. The anchor has to separate day, year, and compressed scale.",
-                        },
-                        {
-                          value: "accurate-drawing-because-order-right",
-                          label: "A Solar System sketch is usually trustworthy for distances as long as the planets are in the right order, so the safest summary is to read the scale directly but treat the timing more loosely.",
-                          feedback:
-                            "That flips the warning backward. The sketch often keeps the pattern while shrinking the distances strongly.",
-                        },
-                      ],
-                      successLabel: "Posted. The room now starts with the right day-year-scale structure.",
-                      retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
-                    } satisfies ScaffoldRoleplayCard;
-                  }
-
-                  if (activeSectionHeading === "how to reason through it") {
-                    return {
-                      id: "f5-l6-how-to-reason",
-                      badge: "Coach move",
-                      title: "Coach the observatory analyst",
-                      scenario:
-                        "A trainee keeps mixing what we see in the sky with the real motions underneath and then trusting the sketch literally. You need the coaching note that gives them a reliable order.",
-                      prompt: "Choose the coaching note to send.",
-                      options: [
-                        {
-                          value: "appearance-then-real-motion-then-scale-warning",
-                          label: "First name the appearance being described. Then match day to rotation and year to orbit. Only after that ask whether the drawing is showing exact size and spacing or just a compressed relationship pattern.",
-                          feedback:
-                            "Exactly. That keeps observation, real motion, and model trust in the right order.",
-                          isCorrect: true,
-                        },
-                        {
-                          value: "trust-model-first",
-                          label: "First trust the model's spacing, then use the picture to decide which motion must be happening each day and each year afterward.",
-                          feedback:
-                            "That starts from the least safe part. The model-scale warning belongs after the motion matching, not before it.",
-                        },
-                        {
-                          value: "start-with-year-because-bigger",
-                          label: "First decide the yearly orbit because it is the bigger motion, then let that same orbit story explain the daily sky sweep unless the diagram says otherwise.",
-                          feedback:
-                            "That rebuilds the exact shortcut the lesson is trying to remove. The daily sky sweep still comes from rotation.",
-                        },
-                      ],
-                      successLabel: "Coaching note sent. The analyst now has a stable order for reading sky motion and model scale.",
-                      retryLabel: "That method would scramble appearance, real motion, and model trust.",
-                    } satisfies ScaffoldRoleplayCard;
-                  }
-
-                  if (activeSectionHeading === "common trap") {
-                    return {
-                      id: "f5-l6-common-trap",
-                      badge: "Trap shield",
-                      title: "Block the scale-is-literal shortcut",
-                      scenario:
-                        "The next learner note says: 'The sketch shows the planets in the right order, so the distances must be roughly right too.' You need the warning that blocks that shortcut before it spreads.",
-                      prompt: "Choose the warning to pin beside the trap.",
-                      options: [
-                        {
-                          value: "pattern-can-be-right-while-scale-is-compressed",
-                          label: "A model can get the order, direction, and relationship pattern right while still shrinking the real distances and times a lot. Treat the structure as trustworthy before you treat the scale as literal.",
-                          feedback:
-                            "Exactly. That is the scale warning this lesson needs learners to remember.",
-                          isCorrect: true,
-                        },
-                        {
-                          value: "order-proves-rough-scale",
-                          label: "If the order of bodies is right, that is usually enough evidence that the distances are at least roughly to scale, even if the exact numbers are not perfect.",
-                          feedback:
-                            "That keeps the trap alive. The whole warning is that correct ordering does not guarantee literal scale.",
-                        },
-                        {
-                          value: "ignore-model-warning",
-                          label: "The safest move is to ignore model-scale warnings completely, because they only matter in advanced astronomy and do not affect a simple day-and-year lesson.",
-                          feedback:
-                            "The warning matters here because the lesson explicitly teaches pattern versus exact scale.",
-                        },
-                      ],
-                      successLabel: "Trap blocked. The room now keeps relationship pattern and literal scale separate.",
-                      retryLabel: "That warning would let the scale shortcut survive.",
-                    } satisfies ScaffoldRoleplayCard;
-                  }
-
-                  if (activeSectionHeading === "analogy") {
-                    return {
-                      id: "f5-l6-analogy",
-                      badge: "Story relay",
-                      title: "Choose the globe-and-sketch bridge",
-                      scenario:
-                        "The team wants one analogy line that helps learners picture why a classroom model can show the right pattern while shrinking the real distances, without confusing the daily sky appearance with the yearly orbit.",
-                      prompt: "Choose the analogy line to send.",
-                      options: [
-                        {
-                          value: "globe-spin-calendar-sketch",
-                          label: "Use the analogy by treating the daily sky sweep like a globe turning once each day, the year like a separate calendar loop around the Sun, and the classroom sketch like a map that keeps the layout pattern while shrinking the real spacing heavily.",
-                          feedback:
-                            "Exactly. That bridge supports the whole lesson without collapsing day, year, and scale together.",
-                          isCorrect: true,
-                        },
-                        {
-                          value: "single-motion-analogy",
-                          label: "Use one single-motion analogy for everything: the same looping path can stand for the daily sky sweep, the yearly orbit, and the scaled drawing all at once if the learner keeps the picture in mind.",
-                          feedback:
-                            "That analogy would blur the three ideas together instead of separating them.",
-                        },
-                        {
-                          value: "literal-mini-solar-system",
-                          label: "Use the analogy by describing the sketch as a tiny but still roughly literal Solar System, so learners can trust the distances while remembering the times are shortened for convenience.",
-                          feedback:
-                            "That would undo the scale warning. The lesson needs the model treated as strongly compressed, not roughly literal.",
-                        },
-                      ],
-                      successLabel: "Analogy chosen. It supports day, year, and compressed scale without mixing them together.",
-                      retryLabel: "That analogy would muddy the lesson instead of helping it.",
-                    } satisfies ScaffoldRoleplayCard;
-                  }
-                }
-              }
+              const f5L6ScaffoldRoleplayCard = getF5L6ScaffoldRoleplayCard({
+                lessonId,
+                isMediaStep,
+                activeMediaIndex,
+                isSectionStep,
+                activeSectionWorkedExample: Boolean(activeSection?.worked_example),
+                activeSectionHeading,
+              });
+              if (f5L6ScaffoldRoleplayCard) return f5L6ScaffoldRoleplayCard;
 
               if (lessonId === "F5_L5") {
                 if (isMediaStep && activeMediaIndex === 0) {
