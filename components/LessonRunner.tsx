@@ -11576,6 +11576,248 @@ function getA11ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A11_L5") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a11-l5-lifecycle-board",
+        badge: "Lifecycle board",
+        title: "Read the stellar pathway as one shared start with mass-dependent endings",
+        scenario:
+          "The lifecycle board shows a shared birth cloud and main-sequence stage, then a branch toward white dwarf, neutron star, or black hole outcomes. One trainee treats every star as heading for a supernova, another treats black hole as the default dramatic ending, and a third memorizes the remnant names without checking how the starting mass changes the route.",
+        prompt: "Pin the note that keeps the lifecycle board accurate.",
+        options: [
+          {
+            value: "mass-branch-remnant-note",
+            label: "Treat stellar evolution as a shared early path with later mass-dependent branching. Lower-mass stars can end more gently as white dwarfs, while much more massive stars can reach supernova collapse and leave neutron stars or, if the remnant is extreme enough, black holes.",
+            feedback:
+              "Exactly. That keeps shared stages, branch choice, and compact remnants in the right A11_L5 order.",
+            isCorrect: true,
+          },
+          {
+            value: "supernova-for-all-note-a11-l5",
+            label: "Treat every star as heading toward a supernova eventually, because once a star is massive enough to shine the later stage differences usually become secondary detail.",
+            feedback:
+              "That would flatten the mass-dependent pathway too far.",
+          },
+          {
+            value: "black-hole-default-note-a11-l5",
+            label: "Treat black hole as the default final outcome for stars, because it is the most extreme compact object and therefore the safest universal endpoint to remember.",
+            feedback:
+              "That would turn one possible high-mass ending into the whole story.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads stellar endings from mass-dependent pathways instead of dramatic endpoint slogans.",
+        retryLabel: "That note would leave a main A11_L5 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a11-l5-fix-ideas",
+          badge: "Path repair",
+          title: "Repair the supernova-for-all and endpoint-list shortcuts",
+          scenario:
+            "One analyst keeps explaining stellar evolution like every star eventually explodes, while another keeps listing white dwarf, neutron star, and black hole as disconnected facts with no branch logic behind them.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-from-starting-mass",
+              label: "Repair both habits together: start with the star's initial mass, keep the early shared stages visible, and then branch the later pathway from that mass. Only the higher-mass routes reach supernova and the more extreme compact remnants.",
+              feedback:
+                "Exactly. That restores the right A11_L5 workflow immediately.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-remnant-names-only-a11-l5",
+              label: "Repair the confusion by focusing mainly on learning the remnant names more carefully, because once students remember which compact objects exist the earlier pathway logic usually becomes secondary detail.",
+              feedback:
+                "That would leave the branch structure too weak.",
+            },
+            {
+              value: "repair-from-dramatic-events-only-a11-l5",
+              label: "Repair the confusion by focusing mainly on the most dramatic collapse events, because once students understand supernova and black hole formation the lower-mass endings usually become obvious automatically.",
+              feedback:
+                "That would still leave the low-mass route badly under-taught.",
+            },
+          ],
+          successLabel: "Repair sent. The room now starts with starting mass before naming the remnant.",
+          retryLabel: "That would leave a main A11_L5 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a11-l5-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line compact-object rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so learners stop treating compact objects as a pile of separate astronomy facts.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a11-l5-anchor",
+              label: "Compact objects are mass-dependent stellar endings, not separate disconnected astronomy facts.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "supernova-is-main-idea-a11-l5",
+              label: "The main idea is mostly that stars can explode as supernovae, because once that dramatic event is known the differences between compact objects usually become secondary detail.",
+              feedback:
+                "That would weaken the actual branch logic too much.",
+            },
+            {
+              value: "black-hole-is-main-idea-a11-l5",
+              label: "The main idea is mostly that some stars end as black holes, because once that extreme outcome is remembered the rest of the lifecycle usually becomes secondary.",
+              feedback:
+                "That would flatten the lesson into one endpoint only.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right mass-dependent ending idea.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a11-l5-technical-words",
+          badge: "Term desk",
+          title: "Clean up the stellar-remnant vocabulary board",
+          scenario:
+            "The crew keeps mixing white dwarf, neutron star, black hole, supernova, and event horizon language until every explanation sounds like one fuzzy story about stars just collapsing harder or softer.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a11-l5",
+              label: "Use white dwarf for the compact low-mass remnant supported before more extreme collapse, neutron star for the denser high-mass post-supernova remnant, black hole for the case where collapse passes the light-escape threshold, supernova for the explosive high-mass route, and event horizon for the boundary associated with the black-hole case.",
+              feedback:
+                "Exactly. That keeps the A11_L5 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-collapse-does-most-a11-l5",
+              label: "Use collapse language as the main word for almost the whole topic, because once students know stars can collapse the separate meanings of white dwarf, neutron star, black hole, and supernova usually become minor detail.",
+              feedback:
+                "That would collapse the lesson vocabulary too far.",
+            },
+            {
+              value: "term-board-supernova-does-most-a11-l5",
+              label: "Use supernova language as the main word for almost the whole topic, because once students remember the explosion stage the later remnant terms usually become secondary detail.",
+              feedback:
+                "That would blur the low-mass and high-mass pathways too much.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A11_L5 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a11-l5-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they choose the remnant",
+          scenario:
+            "The trainee analyst is about to name the compact object, but they have not yet checked whether the star followed a lower-mass or higher-mass pathway and they are still letting the most dramatic endpoint drive the answer.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-with-mass-then-branch",
+              label: "Start with the star's mass pathway. Keep the shared early stages in view, then ask whether the star is on the lower-mass branch or the higher-mass branch. Only after that choose the compact remnant and, for the extreme case, check whether the collapse reaches black-hole conditions.",
+              feedback:
+                "Exactly. That gives the analyst the right A11_L5 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-dramatic-ending-a11-l5",
+              label: "Start from the most dramatic possible ending, because once that extreme case is tested first the less extreme remnants usually become easy enough to assign afterward.",
+              feedback:
+                "That would send the analyst back into endpoint-first guessing.",
+            },
+            {
+              value: "start-from-remnant-name-memory-a11-l5",
+              label: "Start from the remnant names you remember best, because once the compact-object labels are in mind the earlier lifecycle branch usually becomes obvious automatically.",
+              feedback:
+                "That would leave the pathway reasoning too weak.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean mass-pathway-to-remnant method.",
+          retryLabel: "That would send the analyst back into an A11_L5 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a11-l5-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the all-stars-explode and black-hole-default shortcuts",
+          scenario:
+            "One crew member keeps assuming every star eventually explodes, while another keeps using black hole as the default answer whenever a compact object is mentioned.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a11-l5-trap-warning",
+              label: "Do not treat supernova as the fate of every star and do not use black hole as the automatic remnant. The first question is always the mass pathway: lower-mass stars can end as white dwarfs, while much more massive stars can go supernova and leave neutron stars or black holes.",
+              feedback:
+                "Exactly. That warning blocks the main A11_L5 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "supernova-warning-only-a11-l5",
+              label: "Warn mainly that not all stars go supernova, because once students stop overusing that event the compact-object differences usually become obvious automatically.",
+              feedback:
+                "That would leave the black-hole-default shortcut too weakly blocked.",
+            },
+            {
+              value: "black-hole-warning-only-a11-l5",
+              label: "Warn mainly that black holes are not the only compact objects, because once students stop overusing that remnant the rest of the lifecycle usually becomes obvious automatically.",
+              feedback:
+                "That would leave the supernova-for-all shortcut too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps mass pathway and remnant choice in the right order.",
+          retryLabel: "That warning would leave a main A11_L5 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a11-l5-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the branch choice before the endpoint",
+          scenario:
+            "The team wants a comparison that helps beginners feel why one shared stellar start can branch into very different compact endings depending on how massive the star is.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "river-branch-analogy-a11-l5",
+              label: "Think of one river that later branches depending on how much water it carries. Smaller flow follows the gentler outlet, while far larger flow can drive into more extreme channels. The branch choice comes from the scale of the input, not from memorizing the outlet names first.",
+              feedback:
+                "Exactly. That keeps shared start, mass-dependent branch, and different endings visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "single-final-destination-a11-l5",
+              label: "Think mainly of one road with one final destination, because the clearest analogy is usually one where all travelers end up in the same place and only the speed of arrival changes.",
+              feedback:
+                "That would erase the branching pathway the lesson needs.",
+            },
+            {
+              value: "most-dramatic-ending-analogy-a11-l5",
+              label: "Think mainly of a competition where the most dramatic finish is the one everyone eventually reaches, because the clearest analogy is usually one where the biggest ending is also the most general one.",
+              feedback:
+                "That would drag the lesson back toward black-hole-default thinking.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on mass-dependent branching before endpoint naming.",
+          retryLabel: "That analogy would pull the lesson away from the right A11_L5 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
