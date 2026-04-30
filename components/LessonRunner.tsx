@@ -11334,6 +11334,248 @@ function getA11ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A11_L4") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a11-l4-distance-ladder-board",
+        badge: "Distance ladder",
+        title: "Choose the rung from the scale before you choose the calculation",
+        scenario:
+          "The distance-ladder board shows a nearby-star parallax triangle next to a standard-candle brightness comparison for much larger scales. One trainee wants one universal distance method for everything, another keeps using apparent brightness alone with no known luminosity, and a third keeps trying parallax first even when the shift would be far too tiny to measure well.",
+        prompt: "Pin the note that keeps the ladder reading accurate.",
+        options: [
+          {
+            value: "scale-first-rung-choice-note",
+            label: "Treat the ladder as a scale-choice system. Use parallax for relatively nearby stars where the geometric shift can still be measured, move to standard candles when you know the true luminosity but parallax is too tiny, and choose the rung before choosing the formula.",
+            feedback:
+              "Exactly. That keeps scale, evidence type, and method choice in the right A11_L4 order.",
+            isCorrect: true,
+          },
+          {
+            value: "one-method-fits-all-note-a11-l4",
+            label: "Treat distance measurement mainly as one repeated calculation method, because once a distance formula is known it is usually safer to reuse the same approach across all astronomical scales.",
+            feedback:
+              "That would flatten the ladder idea too far.",
+          },
+          {
+            value: "brightness-alone-note-a11-l4",
+            label: "Treat apparent brightness as enough by itself, because brighter-looking objects are usually the nearer ones and that visual clue is normally enough to infer the distance without needing a separate luminosity rung.",
+            feedback:
+              "That would blur apparent brightness with the standard-candle logic.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads distance measurement as rung choice by scale, not one generic method.",
+        retryLabel: "That note would leave a main A11_L4 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a11-l4-fix-ideas",
+          badge: "Rung repair",
+          title: "Repair the one-method and brightness-only shortcuts",
+          scenario:
+            "One analyst keeps trying to use parallax for every target no matter the scale, while another keeps treating standard-candle work as if apparent brightness alone gives the distance with no known luminosity step.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-pick-rung-from-scale",
+              label: "Repair both habits together: pick the rung from the scale first. Keep parallax for nearby stars where the angle is still measurable, and keep standard candles for more distant targets only when the source's true luminosity is known so apparent brightness can be interpreted properly.",
+              feedback:
+                "Exactly. That restores the right A11_L4 workflow immediately.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-geometry-only-a11-l4",
+              label: "Repair the confusion by focusing mainly on geometry, because once students remember that astronomy is about angles and triangles the separate brightness-rung details usually sort themselves out afterward.",
+              feedback:
+                "That would leave the standard-candle side too weak.",
+            },
+            {
+              value: "repair-from-brightness-ranking-a11-l4",
+              label: "Repair the confusion by focusing mainly on brightness ranking, because once students know which targets look brighter the parallax and luminosity details usually become obvious automatically.",
+              feedback:
+                "That would still leave the ladder logic badly blurred.",
+            },
+          ],
+          successLabel: "Repair sent. The room now chooses the distance rung from the scale before touching the calculation.",
+          retryLabel: "That would leave a main A11_L4 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a11-l4-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line ladder rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so learners stop treating astronomical distance measurement as one repeated trick.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a11-l4-anchor",
+              label: "Astronomical distance measurement is a ladder because different scales require different evidence methods.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "parallax-is-main-idea-a11-l4",
+              label: "The main idea is mostly that parallax measures distance, because once that geometry is known the rest of the astronomical methods usually become secondary detail.",
+              feedback:
+                "That would weaken the actual ladder meaning too much.",
+            },
+            {
+              value: "brightness-is-main-idea-a11-l4",
+              label: "The main idea is mostly that dimmer things are farther away, because once that visual pattern is known the rest of the distance methods usually become secondary.",
+              feedback:
+                "That would flatten the lesson into a misleading shortcut.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right ladder idea.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a11-l4-technical-words",
+          badge: "Term desk",
+          title: "Clean up the distance-ladder vocabulary board",
+          scenario:
+            "The crew keeps mixing parallax, arcseconds, standard candle, luminosity, and apparent brightness until every explanation sounds like one fuzzy story about stars just looking near or far.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a11-l4",
+              label: "Use parallax for the small apparent positional shift used on the nearby geometric rung, arcseconds for the tiny angle unit, standard candle for an object with known true luminosity, luminosity for total power output, and apparent brightness for the power per area received at Earth.",
+              feedback:
+                "Exactly. That keeps the A11_L4 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-angle-does-most-a11-l4",
+              label: "Use angle language as the main word for almost the whole topic, because once students know astronomy uses small angles the separate meanings of luminosity, standard candles, and apparent brightness usually become minor detail.",
+              feedback:
+                "That would collapse the ladder vocabulary too far.",
+            },
+            {
+              value: "term-board-brightness-does-most-a11-l4",
+              label: "Use brightness language as the main word for almost the whole topic, because once students know some sources look brighter than others the separate meanings of parallax and standard candles usually become secondary.",
+              feedback:
+                "That would blur the rung differences too much.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A11_L4 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a11-l4-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they choose the distance method",
+          scenario:
+            "The trainee analyst is about to calculate a cosmic distance, but they have not yet checked whether the target is nearby enough for parallax or whether the source is a known standard candle.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-with-scale-then-evidence-type",
+              label: "Start with the scale. Ask whether the target is close enough for a measurable parallax angle. If not, ask whether there is a known-luminosity source so standard-candle logic can be used. Choose the rung first, then calculate.",
+              feedback:
+                "Exactly. That gives the analyst the right A11_L4 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-formula-memory-a11-l4",
+              label: "Start from the formula you remember most confidently, because once a familiar distance calculation is underway the right evidence type usually becomes clear enough afterward.",
+              feedback:
+                "That would send the analyst back into method-first guessing.",
+            },
+            {
+              value: "start-from-how-bright-it-looks-a11-l4",
+              label: "Start from how bright the object looks, because once the target seems bright or faint the most suitable distance method usually becomes obvious automatically.",
+              feedback:
+                "That would leave the evidence chain too weak and unsafe.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean scale-to-rung method.",
+          retryLabel: "That would send the analyst back into an A11_L4 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a11-l4-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the one-formula and brightness-alone shortcuts",
+          scenario:
+            "One crew member keeps treating the distance ladder like one formula with different numbers, while another keeps assuming apparent brightness is enough to infer distance with no separate rung choice.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a11-l4-trap-warning",
+              label: "Do not treat all astronomical distances as one method and do not use apparent brightness by itself as a distance answer. Pick the rung from the scale first: parallax for nearby measurable shifts, standard candles when true luminosity is known and parallax is no longer practical.",
+              feedback:
+                "Exactly. That warning blocks the main A11_L4 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "parallax-warning-only-a11-l4",
+              label: "Warn mainly that parallax has limits, because once students stop overusing that one method the brightness and standard-candle details usually become obvious automatically.",
+              feedback:
+                "That would leave the brightness-side trap too weakly blocked.",
+            },
+            {
+              value: "brightness-warning-only-a11-l4",
+              label: "Warn mainly that brightness can mislead, because once students stop trusting appearance the rest of the ladder usually becomes obvious automatically.",
+              feedback:
+                "That would leave the rung-choice workflow too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps rung choice and evidence type in the right order.",
+          retryLabel: "That warning would leave a main A11_L4 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a11-l4-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the ladder-rung choice visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why astronomers switch methods with scale instead of insisting on one universal measuring trick.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "tool-ladder-analogy-a11-l4",
+              label: "Think of measuring with different tools for different ranges: a short ruler for nearby objects, then a larger survey method once the ruler becomes impractical. Astronomy works the same way: parallax is the nearby ruler, and standard candles are a different rung used when the scale gets too large.",
+              feedback:
+                "Exactly. That keeps the ladder-rung choice visible without blurring the methods together.",
+              isCorrect: true,
+            },
+            {
+              value: "one-ruler-for-everything-a11-l4",
+              label: "Think mainly of one ruler used everywhere, because the clearest analogy is usually one where the same basic measuring action should keep working no matter how large the distance becomes.",
+              feedback:
+                "That would erase the whole ladder idea.",
+            },
+            {
+              value: "looks-far-looks-near-analogy-a11-l4",
+              label: "Think mainly of guessing distance by how large or bright something looks, because the clearest analogy is usually one where appearance alone gives a practical answer before any formal method is needed.",
+              feedback:
+                "That would drag the lesson back toward the wrong evidence story.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on changing rungs with changing scale.",
+          retryLabel: "That analogy would pull the lesson away from the right A11_L4 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
