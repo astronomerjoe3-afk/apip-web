@@ -10850,6 +10850,248 @@ function getA11ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A11_L2") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a11-l2-orbit-board",
+        badge: "Orbit board",
+        title: "Read orbit mechanics and observation role on the same route map",
+        scenario:
+          "The orbit board compares a low satellite route with a geostationary-style route. One trainee keeps treating orbit type like a label choice with no mechanics underneath, another says gravity only pulls satellites down and does not explain stable orbit, and a third assumes the observation job can be chosen first without caring about altitude, period, or viewing pattern.",
+        prompt: "Pin the note that keeps the orbit board accurate.",
+        options: [
+          {
+            value: "gravity-radius-role-note",
+            label: "Treat satellite choice as one linked mechanics-and-mission story. Gravity provides the inward turning pull for orbit, orbital radius sets speed and period, and the chosen altitude then shapes what the satellite can observe well, whether that means fast-repeat low passes or a fixed-view geostationary-style role.",
+            feedback:
+              "Exactly. That keeps gravity, radius, period, and observation role in the right A11_L2 order.",
+            isCorrect: true,
+          },
+          {
+            value: "labels-first-note-a11-l2",
+            label: "Treat orbit type mainly as a category label, because once a satellite is called low orbit or geostationary the detailed speed, period, and viewing-pattern reasons usually become secondary.",
+            feedback:
+              "That would flatten the mechanics-and-mission link too far.",
+          },
+          {
+            value: "gravity-only-falls-note-a11-l2",
+            label: "Treat gravity mainly as the force that tries to make satellites fall back, because stable orbit is mostly about avoiding gravity long enough rather than about gravity supplying the turning itself.",
+            feedback:
+              "That would break the central orbit story the lesson needs.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads satellite choice as gravity-turning plus mission-fit, not as labels alone.",
+        retryLabel: "That note would leave a main A11_L2 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a11-l2-fix-ideas",
+          badge: "Route repair",
+          title: "Repair the label-only and gravity-is-just-falling shortcuts",
+          scenario:
+            "One analyst keeps classifying satellites by label without checking period or altitude, while another keeps saying gravity is only the thing satellites resist rather than the thing that continuously turns the orbit.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-from-radius-period-role",
+              label: "Repair both habits together: start with gravity as the inward pull that keeps the satellite turning, then connect orbital radius to speed and period, and only after that match the orbit to the observation role the mission needs.",
+              feedback:
+                "Exactly. That restores the right A11_L2 workflow immediately.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-applications-only-a11-l2",
+              label: "Repair the confusion by focusing mainly on what the satellite is used for, because once the mission type is clear the orbit details usually sort themselves out afterward.",
+              feedback:
+                "That would leave the mechanics side too weak.",
+            },
+            {
+              value: "repair-from-speed-only-a11-l2",
+              label: "Repair the confusion by focusing mainly on orbital speed, because once the faster-versus-slower comparison is clear the gravity and observation-role details usually become obvious automatically.",
+              feedback:
+                "That would still leave too much of the linked story missing.",
+            },
+          ],
+          successLabel: "Repair sent. The room now starts with gravity-turning before naming orbit role.",
+          retryLabel: "That would leave a main A11_L2 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a11-l2-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line orbit-choice rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so learners stop treating satellite choice as a list of space facts with no mechanics underneath.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a11-l2-anchor",
+              label: "Satellite behaviour and usefulness both come from gravity-provided orbiting and the altitude chosen for the mission.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "mission-only-anchor-a11-l2",
+              label: "The main idea is mostly that satellites are chosen by what they observe, because once the mission is known the orbit mechanics usually become secondary detail.",
+              feedback:
+                "That would weaken the orbit-mechanics meaning too much.",
+            },
+            {
+              value: "speed-only-anchor-a11-l2",
+              label: "The main idea is mostly that some satellites move faster than others, because once that is known the period and observation-role differences usually become secondary.",
+              feedback:
+                "That would flatten the lesson into one variable only.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right orbit-choice idea.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a11-l2-technical-words",
+          badge: "Term desk",
+          title: "Clean up the orbit-role vocabulary board",
+          scenario:
+            "The crew keeps mixing orbital radius, period, geostationary orbit, equatorial plane, and observation role until every explanation sounds like one fuzzy story about satellites being high or low in space.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a11-l2",
+              label: "Use orbital radius for the distance from the planet's center, period for the time for one full orbit, geostationary orbit for the special case that matches Earth's rotation and stays above one longitude, equatorial plane for the no-north-south-drift condition, and observation role for the practical viewing advantage created by the chosen orbit.",
+              feedback:
+                "Exactly. That keeps the A11_L2 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-height-does-most-a11-l2",
+              label: "Use height language as the main word for almost the whole topic, because once students know one satellite is higher and another is lower the separate meanings of period, geostationary, and observation role usually become minor detail.",
+              feedback:
+                "That would collapse the lesson vocabulary too far.",
+            },
+            {
+              value: "term-board-application-does-most-a11-l2",
+              label: "Use application language as the main word for almost the whole topic, because once students know what the satellite is for the separate orbit terms usually become secondary detail.",
+              feedback:
+                "That would blur the mechanics terms too much.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A11_L2 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a11-l2-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they choose the orbit",
+          scenario:
+            "The trainee analyst is about to recommend an orbit, but they have not yet connected radius to speed and period, and they are still treating the mission role as a separate label instead of a consequence of the chosen orbit.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-with-radius-then-role",
+              label: "Start with the orbit mechanics. Ask what orbital radius is being used, then connect that to speed and period, and only after that decide whether the resulting viewing pattern suits the mission, such as rapid repeat coverage in low orbit or fixed ground view in a geostationary-style orbit.",
+              feedback:
+                "Exactly. That gives the analyst the right A11_L2 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-mission-label-a11-l2",
+              label: "Start from the mission label alone, because once the satellite is called communication, weather, or Earth observation the right orbit usually becomes easy enough to guess afterward.",
+              feedback:
+                "That would send the analyst back into label-first guessing.",
+            },
+            {
+              value: "start-from-gravity-strength-only-a11-l2",
+              label: "Start from whether gravity is strong or weak at the orbit, because once that trend is named the period and observation-role details usually become obvious enough automatically.",
+              feedback:
+                "That would leave the linked radius-to-period reasoning too weak.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean orbit-mechanics-to-mission-fit method.",
+          retryLabel: "That would send the analyst back into an A11_L2 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a11-l2-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the geostationary-is-just-high and mission-first shortcuts",
+          scenario:
+            "One crew member keeps treating geostationary orbit as just 'very high up,' while another keeps deciding the satellite job first and assuming the mechanics will work themselves out later.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a11-l2-trap-warning",
+              label: "Do not treat orbit choice as just a label or altitude slogan. A geostationary satellite must match Earth's rotation period and stay in the equatorial plane, and every mission choice should be checked against the radius, period, and viewing pattern the orbit actually gives.",
+              feedback:
+                "Exactly. That warning blocks the main A11_L2 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "height-warning-only-a11-l2",
+              label: "Warn mainly that high and low orbits are different, because once students stop calling them the same thing the period and mission-fit details usually recover themselves.",
+              feedback:
+                "That would leave too much of the real trap active.",
+            },
+            {
+              value: "mission-warning-only-a11-l2",
+              label: "Warn mainly that missions differ, because once students stop treating all satellites as doing the same job the orbit-mechanics details usually become secondary.",
+              feedback:
+                "That would leave the mechanics side too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps orbital mechanics and observation fit tied together.",
+          retryLabel: "That warning would leave a main A11_L2 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a11-l2-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps route choice tied to job fit",
+          scenario:
+            "The team wants a comparison that helps beginners feel why one orbit gives quick repeat passes while another can keep watch over the same region, without turning the lesson into a pile of labels.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "track-lane-watchtower-analogy",
+              label: "Think of different running lanes and watch routes around a stadium. A closer lane means faster laps and more frequent passes, while a specially matched route can keep returning to the same viewing arrangement. The route choice and the job fit must be read together, not as separate labels.",
+              feedback:
+                "Exactly. That keeps route mechanics and observation role visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "job-label-analogy-a11-l2",
+              label: "Think mainly of different staff job titles, because the clearest analogy is usually one where the assigned role matters and the route each person takes can stay in the background.",
+              feedback:
+                "That would flatten the orbit-mechanics side too much.",
+            },
+            {
+              value: "height-only-analogy-a11-l2",
+              label: "Think mainly of one observer standing higher than another, because the clearest analogy is usually one where altitude alone explains why the satellite behaves differently.",
+              feedback:
+                "That would erase the period and path-pattern part of the lesson.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on route mechanics plus mission fit.",
+          retryLabel: "That analogy would pull the lesson away from the right A11_L2 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
