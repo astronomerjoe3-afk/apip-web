@@ -11092,6 +11092,248 @@ function getA11ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A11_L3") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a11-l3-spectrum-hr-board",
+        badge: "Spectrum-HR board",
+        title: "Read the spectrum first, then place the star on the H-R story",
+        scenario:
+          "The spectrum-and-HR board shows absorption-line clues, a color-temperature hint, and a star's location on the H-R diagram. One trainee keeps treating the H-R diagram like a chart to memorize with no evidence behind it, another wants to place the star by brightness words alone, and a third keeps skipping the spectrum and jumping straight to a region label.",
+        prompt: "Pin the note that keeps the board reading accurate.",
+        options: [
+          {
+            value: "spectrum-then-temperature-then-hr-note",
+            label: "Treat the board as one connected stellar story. Read the spectrum first for temperature and composition clues, then combine that with luminosity to place the star on the H-R diagram, and only after that use the region to reason about whether the star fits the main sequence, giant, or white-dwarf pattern.",
+            feedback:
+              "Exactly. That keeps spectrum evidence, temperature, luminosity, and H-R placement in the right A11_L3 order.",
+            isCorrect: true,
+          },
+          {
+            value: "hr-chart-only-note-a11-l3",
+            label: "Treat the H-R diagram mainly as a classification chart, because once the star is placed somewhere on the graph the spectrum details usually become secondary decoration.",
+            feedback:
+              "That would flatten the evidence chain too far.",
+          },
+          {
+            value: "brightness-alone-note-a11-l3",
+            label: "Treat the brightest-looking stars as the most informative cases, because apparent brightness is usually enough to decide where the star belongs and what stage it is in.",
+            feedback:
+              "That would blur apparent brightness with the actual luminosity-and-temperature story.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads stellar classification from evidence and placement together, not from memorized labels alone.",
+        retryLabel: "That note would leave a main A11_L3 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a11-l3-fix-ideas",
+          badge: "Evidence repair",
+          title: "Repair the chart-memorizing and brightness-only shortcuts",
+          scenario:
+            "One analyst keeps using the H-R diagram like a picture to memorize, while another keeps deciding stellar type from brightness talk alone without anchoring the temperature clue from the spectrum.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-spectrum-before-region",
+              label: "Repair both habits together: start with the spectrum to anchor temperature, then combine that with luminosity before naming the H-R region. The stellar class should come out of the evidence, not replace it.",
+              feedback:
+                "Exactly. That restores the right A11_L3 workflow immediately.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-region-labels-only-a11-l3",
+              label: "Repair the confusion by focusing mainly on the names of the H-R regions, because once students know the common zones the spectrum details usually sort themselves out afterward.",
+              feedback:
+                "That would leave the evidence side too weak.",
+            },
+            {
+              value: "repair-from-color-alone-a11-l3",
+              label: "Repair the confusion by focusing mainly on color words, because once a star is called blue, red, or yellow the luminosity and region reasoning usually become obvious automatically.",
+              feedback:
+                "That would still leave the linked temperature-and-luminosity story too thin.",
+            },
+          ],
+          successLabel: "Repair sent. The room now starts from spectrum evidence before naming the H-R region.",
+          retryLabel: "That would leave a main A11_L3 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a11-l3-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line spectrum-HR rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so learners stop treating stellar classification like a stack of disconnected astronomy facts.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a11-l3-anchor",
+              label: "Stellar spectra and H-R position work together to reveal temperature, luminosity, and evolutionary stage.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "spectrum-only-anchor-a11-l3",
+              label: "The main idea is mostly that spectra tell us about stars, because once the line pattern is known the H-R diagram usually becomes secondary detail.",
+              feedback:
+                "That would weaken the placement-and-stage meaning too much.",
+            },
+            {
+              value: "hr-only-anchor-a11-l3",
+              label: "The main idea is mostly that stars belong in H-R regions, because once the chart position is known the spectrum evidence usually becomes secondary detail.",
+              feedback:
+                "That would flatten the lesson into chart memory.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right spectrum-and-HR idea.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a11-l3-technical-words",
+          badge: "Term desk",
+          title: "Clean up the stellar-spectrum vocabulary board",
+          scenario:
+            "The crew keeps mixing spectrum, peak wavelength, surface temperature, luminosity, and H-R region language until every explanation sounds like one fuzzy story about stars just being bright or dim.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a11-l3",
+              label: "Use spectrum for the light pattern carrying composition and temperature clues, peak wavelength for the temperature anchor, luminosity for the star's total power output, and H-R region for the place reached after temperature and luminosity are combined into one classification picture.",
+              feedback:
+                "Exactly. That keeps the A11_L3 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-brightness-does-most-a11-l3",
+              label: "Use brightness language as the main word for almost the whole topic, because once students know which stars seem brighter the separate meanings of spectrum, luminosity, and H-R region usually become minor detail.",
+              feedback:
+                "That would collapse the lesson vocabulary too far.",
+            },
+            {
+              value: "term-board-color-does-most-a11-l3",
+              label: "Use color language as the main word for almost the whole topic, because once students know hot stars look bluer and cool stars look redder the separate H-R and luminosity meanings usually become secondary.",
+              feedback:
+                "That would blur the evidence chain too much.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A11_L3 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a11-l3-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they classify the star",
+          scenario:
+            "The trainee analyst is about to name the stellar region, but they have not yet used the spectrum to anchor temperature and they are still treating luminosity like a descriptive word instead of part of the placement logic.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-with-spectrum-then-luminosity",
+              label: "Start with the spectrum to anchor the temperature story. Then combine that with luminosity before choosing the H-R region, and only after that use the region to reason about the star's likely stage or type.",
+              feedback:
+                "Exactly. That gives the analyst the right A11_L3 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-hr-region-name-a11-l3",
+              label: "Start from the H-R region name alone, because once the star is tentatively placed on the chart the spectral and luminosity details usually become easy enough to fit afterward.",
+              feedback:
+                "That would send the analyst back into label-first guessing.",
+            },
+            {
+              value: "start-from-apparent-brightness-a11-l3",
+              label: "Start from how bright the star looks, because once the visual impression is strong enough the temperature and region details usually become obvious automatically.",
+              feedback:
+                "That would leave the real classification evidence too weak.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean spectrum-to-placement method.",
+          retryLabel: "That would send the analyst back into an A11_L3 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a11-l3-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the memorized-chart and apparent-brightness shortcuts",
+          scenario:
+            "One crew member keeps memorizing H-R regions with no evidence chain, while another keeps treating apparent brightness as if it directly settles luminosity and stellar stage.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a11-l3-trap-warning",
+              label: "Do not use the H-R diagram as a memorized chart and do not confuse apparent brightness with the luminosity-and-temperature story. Read the spectrum first, then combine temperature and luminosity before naming the stellar region.",
+              feedback:
+                "Exactly. That warning blocks the main A11_L3 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "chart-warning-only-a11-l3",
+              label: "Warn mainly that the chart should not be memorized, because once students stop doing that the brightness and spectrum details usually sort themselves out on their own.",
+              feedback:
+                "That would leave the brightness confusion too weakly blocked.",
+            },
+            {
+              value: "brightness-warning-only-a11-l3",
+              label: "Warn mainly that brightness words can mislead, because once students stop trusting appearance the H-R and spectrum reasoning usually becomes obvious automatically.",
+              feedback:
+                "That would leave the evidence-to-region workflow too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps spectrum evidence and H-R placement working together.",
+          retryLabel: "That warning would leave a main A11_L3 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a11-l3-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps clue-reading tied to the star map",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the spectrum is the clue sheet and the H-R diagram is the placement map, without turning either one into a stand-alone trick.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "barcode-and-city-map-analogy",
+              label: "Think of the spectrum like a barcode clue sheet that tells you important properties first, and the H-R diagram like a city map where those properties place the star in a meaningful district. The clue sheet and the map work together; neither one tells the full story alone.",
+              feedback:
+                "Exactly. That keeps clue-reading and map placement visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "map-only-analogy-a11-l3",
+              label: "Think mainly of a city map with named districts, because the clearest analogy is usually one where the place name matters and the clue sheet can stay in the background.",
+              feedback:
+                "That would flatten the spectrum-evidence side too much.",
+            },
+            {
+              value: "barcode-only-analogy-a11-l3",
+              label: "Think mainly of a barcode scanner result, because the clearest analogy is usually one where the code itself matters and the later placement picture can stay in the background.",
+              feedback:
+                "That would erase the H-R placement side of the lesson.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on spectrum clues plus H-R placement.",
+          retryLabel: "That analogy would pull the lesson away from the right A11_L3 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
