@@ -11818,6 +11818,248 @@ function getA11ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A11_L6") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a11-l6-cosmology-board",
+        badge: "Cosmology board",
+        title: "Read redshift as expansion evidence, not just as a color fact",
+        scenario:
+          "The cosmology board compares near and far galaxy spectra, a distance-redshift trend, and an expanding-space sketch. One trainee keeps treating redshift as just a color label, another wants to explain the universe as one ordinary explosion into empty space, and a third keeps using one galaxy example without checking the larger distance pattern.",
+        prompt: "Pin the note that keeps the cosmology board accurate.",
+        options: [
+          {
+            value: "redshift-pattern-expansion-note",
+            label: "Treat cosmology as an evidence chain. Read redshift as a wavelength-stretch clue, then compare how greater galaxy distance usually comes with greater redshift and faster recession in the simple Hubble picture. That large-scale pattern supports an expanding-universe model more strongly than one isolated galaxy case.",
+            feedback:
+              "Exactly. That keeps wavelength evidence, distance trend, and expansion reasoning in the right A11_L6 order.",
+            isCorrect: true,
+          },
+          {
+            value: "red-is-just-color-note-a11-l6",
+            label: "Treat redshift mainly as a color-name fact, because once the observed light looks redder the expansion story usually becomes obvious enough without needing a careful wavelength or distance pattern.",
+            feedback:
+              "That would flatten the evidence chain too far.",
+          },
+          {
+            value: "ordinary-explosion-note-a11-l6",
+            label: "Treat the universe mainly like one ordinary explosion that threw galaxies through pre-existing space, because that is the most intuitive way to explain why distant galaxies move away faster.",
+            feedback:
+              "That would blur the expanding-space model the lesson is trying to preserve.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads cosmology from redshift pattern evidence instead of slogans or color words alone.",
+        retryLabel: "That note would leave a main A11_L6 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a11-l6-fix-ideas",
+          badge: "Signal repair",
+          title: "Repair the color-name and ordinary-explosion shortcuts",
+          scenario:
+            "One analyst keeps explaining redshift as if it were just a color word, while another keeps explaining the universe as one simple blast into empty space with no need for a distance-redshift pattern.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-from-wavelength-then-pattern",
+              label: "Repair both habits together: start with redshift as a wavelength-stretch measurement, then check the larger pattern that farther galaxies usually show larger redshifts and faster recession in the simple model. Only after that move to the expanding-universe interpretation.",
+              feedback:
+                "Exactly. That restores the right A11_L6 workflow immediately.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-red-color-alone-a11-l6",
+              label: "Repair the confusion by focusing mainly on the fact that the observed light is shifted toward red, because once that color change is named the distance and expansion details usually sort themselves out afterward.",
+              feedback:
+                "That would leave the wavelength-and-pattern meaning too weak.",
+            },
+            {
+              value: "repair-from-explosion-picture-a11-l6",
+              label: "Repair the confusion by using a cleaner explosion picture, because once students picture everything flying outward from one event the cosmology evidence usually becomes easier to guess automatically.",
+              feedback:
+                "That would still keep the wrong model center stage.",
+            },
+          ],
+          successLabel: "Repair sent. The room now starts from wavelength evidence before naming the cosmology model.",
+          retryLabel: "That would leave a main A11_L6 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a11-l6-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line expansion-evidence rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so learners stop treating cosmology as a vague origin story with no evidence chain behind it.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a11-l6-anchor",
+              label: "Cosmology becomes more coherent when galaxy redshift is read as evidence for an expanding universe.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "redshift-is-main-idea-a11-l6",
+              label: "The main idea is mostly that distant galaxies look redder, because once that color trend is remembered the expansion interpretation usually becomes secondary detail.",
+              feedback:
+                "That would weaken the actual evidence-to-model link too much.",
+            },
+            {
+              value: "big-bang-is-main-idea-a11-l6",
+              label: "The main idea is mostly that the universe began once, because once that broad story is known the redshift evidence usually becomes secondary support detail.",
+              feedback:
+                "That would flatten the lesson into claim-first instead of evidence-first reasoning.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right expansion-evidence idea.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a11-l6-technical-words",
+          badge: "Term desk",
+          title: "Clean up the cosmology vocabulary board",
+          scenario:
+            "The crew keeps mixing redshift, recession speed, Hubble law, expanding universe, and dark energy until every explanation sounds like one fuzzy story about galaxies just looking red and far away.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a11-l6",
+              label: "Use redshift for the measured wavelength increase, recession speed for the inferred away-motion in the simple model, Hubble law for the large-scale link between recession speed and distance, expanding universe for the stretching-space interpretation of that pattern, and dark energy for the modern idea used to describe accelerated expansion.",
+              feedback:
+                "Exactly. That keeps the A11_L6 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-red-does-most-a11-l6",
+              label: "Use red language as the main word for almost the whole topic, because once students know the spectra shift toward red the separate meanings of Hubble law, recession speed, and dark energy usually become minor detail.",
+              feedback:
+                "That would collapse the lesson vocabulary too far.",
+            },
+            {
+              value: "term-board-explosion-does-most-a11-l6",
+              label: "Use explosion language as the main word for almost the whole topic, because once students picture everything moving outward the separate meanings of redshift, Hubble law, and dark energy usually become secondary detail.",
+              feedback:
+                "That would blur the evidence-based model too much.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A11_L6 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a11-l6-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they argue for expansion",
+          scenario:
+            "The trainee analyst is about to make a cosmology claim, but they have not yet gone from wavelength shift to redshift, then to recession trend, then to the large-scale model.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-with-shift-then-pattern-then-model",
+              label: "Start with the measured wavelength shift and calculate or identify the redshift. Then compare that with galaxy distance or the wider recession pattern. Only after the evidence pattern is clear should you move to the expanding-universe interpretation and the role of modern cosmology ideas like dark energy.",
+              feedback:
+                "Exactly. That gives the analyst the right A11_L6 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-big-bang-story-a11-l6",
+              label: "Start from the broad origin story first, because once the universe is described as expanding the redshift details usually become easy enough to fit in afterward.",
+              feedback:
+                "That would send the analyst back into claim-first reasoning.",
+            },
+            {
+              value: "start-from-color-appearance-a11-l6",
+              label: "Start from how red the spectrum looks, because once the visual shift is obvious the distance pattern and cosmology model usually become obvious automatically.",
+              feedback:
+                "That would leave the quantitative evidence chain too weak.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean redshift-to-pattern-to-model method.",
+          retryLabel: "That would send the analyst back into an A11_L6 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a11-l6-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the color-only and ordinary-explosion shortcuts",
+          scenario:
+            "One crew member keeps treating redshift like a color word only, while another keeps explaining cosmology with the mental picture of an ordinary explosion through static space.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a11-l6-trap-warning",
+              label: "Do not stop at the color name and do not replace cosmology with an ordinary explosion picture. Redshift is a wavelength measurement, the farther-galaxy larger-redshift pattern is the key evidence, and the model is expanding space rather than just debris moving through a fixed background.",
+              feedback:
+                "Exactly. That warning blocks the main A11_L6 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "color-warning-only-a11-l6",
+              label: "Warn mainly that redshift is more than a color word, because once students stop saying 'red' too casually the rest of the cosmology model usually becomes obvious automatically.",
+              feedback:
+                "That would leave the expansion-model trap too weakly blocked.",
+            },
+            {
+              value: "explosion-warning-only-a11-l6",
+              label: "Warn mainly that the universe is not one ordinary explosion, because once students stop using that picture the redshift and Hubble-pattern details usually become obvious automatically.",
+              feedback:
+                "That would leave the evidence chain too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps wavelength evidence, distance trend, and expanding-space model in the right order.",
+          retryLabel: "That warning would leave a main A11_L6 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a11-l6-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the stretch pattern before the conclusion",
+          scenario:
+            "The team wants a comparison that helps beginners picture why more distant galaxies usually show more stretched light, without turning the lesson into a simple explosion story.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "stretch-map-analogy-a11-l6",
+              label: "Think of marks drawn on a stretching sheet where the longer the light's journey through the stretched pattern, the more the spacing between marks is pulled out. The key point is the stretch pattern across the whole sheet, not one burst from a center into empty space.",
+              feedback:
+                "Exactly. That keeps the analogy serving the redshift-pattern story cleanly.",
+              isCorrect: true,
+            },
+            {
+              value: "firework-burst-analogy-a11-l6",
+              label: "Think mainly of a firework burst, because the clearest analogy is usually one where fragments simply fly outward through the air and that motion alone explains the whole cosmology picture.",
+              feedback:
+                "That would drag the lesson back toward the wrong model.",
+            },
+            {
+              value: "color-fade-analogy-a11-l6",
+              label: "Think mainly of paint fading toward red with distance, because the clearest analogy is usually one where the observed color change alone explains why distant galaxies support cosmology claims.",
+              feedback:
+                "That would flatten redshift into the wrong kind of clue.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on stretch-pattern evidence instead of an ordinary explosion picture.",
+          retryLabel: "That analogy would pull the lesson away from the right A11_L6 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
